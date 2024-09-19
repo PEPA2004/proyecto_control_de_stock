@@ -1,0 +1,113 @@
+
+
+ Base de datos: `kisko`
+
+DROP DATABASE IF EXISTS `kisko`;
+CREATE DATABASE IF NOT EXISTS `kisko` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `kisko`;
+
+
+ Estructura de tabla para la tabla `bodega`
+
+
+DROP TABLE IF EXISTS `bodega`;
+CREATE TABLE `bodega` (
+  `stock` varchar(50) DEFAULT NULL,
+  `producto` varchar(50) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `precio` int(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ Volcado de datos para la tabla `bodega`
+
+
+INSERT INTO `bodega` (`stock`, `producto`, `id`, `precio`) VALUES
+('8', 'papas', 2835, 50),
+('44', 'leche', 23523, 200);
+
+Estructura de tabla para la tabla `caja`
+
+DROP TABLE IF EXISTS `caja`;
+CREATE TABLE `caja` (
+  `ventas` varchar(50) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `monto_inicial_dia` varchar(50) DEFAULT NULL,
+  `monto_final_dia` varchar(50) DEFAULT NULL,
+  `ingreso_por_venta` varchar(50) DEFAULT NULL
+)
+
+ Estructura de tabla para la tabla `kisko`
+
+DROP TABLE IF EXISTS `kisko`;
+CREATE TABLE `kisko` (
+  `traba_dni` int(11) DEFAULT NULL,
+  `caja_id` int(11) DEFAULT NULL,
+  `id_prod` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ Estructura de tabla para la tabla `trabajador`
+
+
+DROP TABLE IF EXISTS `trabajador`;
+CREATE TABLE `trabajador` (
+  `nombre` varchar(50) DEFAULT NULL,
+  `apellido` varchar(50) DEFAULT NULL,
+  `correo` varchar(100) DEFAULT NULL,
+  `usuario` varchar(50) DEFAULT NULL,
+  `contraseña` varchar(50) DEFAULT NULL,
+  `rol` varchar(50) DEFAULT NULL,
+  `tel` int(11) DEFAULT NULL,
+  `dni` int(8) NOT NULL
+) 
+
+ Volcado de datos para la tabla `trabajador`
+
+INSERT INTO `trabajador` (`nombre`, `apellido`, `correo`, `usuario`, `contraseña`, `rol`, `tel`, `dni`) VALUES
+('claudiofwfwf', 'pellegriwfeewf', 'claudioafwew', 'pepe', 'pepeadsda', 'Dueño', 1123333, 1234354),
+('claudio', 'pellegri', 'claudito@gmail.com', 'peppppa', 'holahola', 'Empleado', 1178305824, 12345614),
+('asfcav', 'acvasdc', 'ascacsa', 'caja', '123', 'Array', 2147483647, 12345632),
+('d2q', 'd213d2', 'dd2dsa', 'papa', '123', 'Dueño', 143542351, 54381541),
+('Alexis', 'Oruna', 'alexis.orunaet32@gmail.com', 'sdcs', 'asdada', 'Dueño', 1234567890, 123456789),
+('adsa', 'daw2', 'awdqd', 'adwad', 'awwdqd', 'Empleado', 1242524, 2147483647);
+
+
+ Índices para tablas volcadas
+
+
+
+ Indices de la tabla `bodega`
+
+ALTER TABLE `bodega`
+  ADD PRIMARY KEY (`id`);
+
+
+ Indices de la tabla `caja`
+
+ALTER TABLE `caja`
+  ADD PRIMARY KEY (`id`);
+
+ Indices de la tabla `kisko`
+
+ALTER TABLE `kisko`
+  ADD KEY `traba_dni` (`traba_dni`),
+  ADD KEY `caja_id` (`caja_id`),
+  ADD KEY `id_prod` (`id_prod`);
+
+
+ Indices de la tabla `trabajador`
+
+ALTER TABLE `trabajador`
+  ADD PRIMARY KEY (`dni`);
+
+
+Restricciones para tablas volcadas
+
+ Filtros para la tabla `kisko`
+
+ALTER TABLE `kisko`
+  ADD CONSTRAINT `kisko_ibfk_1` FOREIGN KEY (`traba_dni`) REFERENCES `trabajador` (`dni`),
+  ADD CONSTRAINT `kisko_ibfk_2` FOREIGN KEY (`caja_id`) REFERENCES `caja` (`id`),
+  ADD CONSTRAINT `kisko_ibfk_3` FOREIGN KEY (`id_prod`) REFERENCES `bodega` (`id`);
+COMMIT;
