@@ -1,0 +1,16 @@
+CREATE TABLE PRODUCTOS(
+ID_producto int ,
+nombre_producto varchar(50),
+categoria varchar(100),
+descripcion varchar(50)
+primary key (ID_producto)
+);
+
+
+CREATE TABLE usuarios(
+nombre varchar(50),
+apellido varchar(50),
+correo varchar(50),
+tel num(11),
+rol 
+);
